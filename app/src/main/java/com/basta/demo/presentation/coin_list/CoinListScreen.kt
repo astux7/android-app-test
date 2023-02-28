@@ -29,9 +29,12 @@ fun CoinListScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.coins) { coin ->
-                CoinListItem(onClick = {
-                    navController.navigate("${Directions.coin_detail.name}/${coin.id}")
-                }, coin = coin)
+                CoinListItem(
+                    onClick = {
+                        navController.navigate(Directions.coin_detail.route + "/${coin.id}")
+                    },
+                    coin = coin
+                )
             }
         }
 
@@ -42,8 +45,9 @@ fun CoinListScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp).align(Alignment.Center)
-                )
+                    .padding(horizontal = 20.dp)
+                    .align(Alignment.Center)
+            )
         }
 
         if (state.isLoading) {

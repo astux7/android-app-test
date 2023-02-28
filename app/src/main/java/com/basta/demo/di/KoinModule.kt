@@ -1,5 +1,6 @@
 package com.basta.demo.di
 
+import androidx.lifecycle.SavedStateHandle
 import com.basta.demo.common.Constants
 import com.basta.demo.data.remote.CoinPaprikaApi
 import com.basta.demo.data.repository.CoinRepositoryImpl
@@ -67,6 +68,6 @@ object KoinModule {
     private val viewModelModule: Module
         get() = module {
             viewModel { CoinListViewModel(get()) }
-            viewModel { CoinDetailViewModel(get(), get()) }
+            viewModel { (savedStateHandle: SavedStateHandle) -> CoinDetailViewModel(get(), savedStateHandle) }
         }
 }
