@@ -6,7 +6,10 @@ import com.basta.demo.data.repository.CoinRepositoryImpl
 import com.basta.demo.domain.repository.CoinRepository
 import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
 import com.basta.demo.domain.use_case.get_coins.GetCoinsUseCase
+import com.basta.demo.presentation.coin_detail.CoinDetailViewModel
+import com.basta.demo.presentation.coin_list.CoinListViewModel
 import okhttp3.OkHttpClient
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -63,6 +66,7 @@ object KoinModule {
 
     private val viewModelModule: Module
         get() = module {
-          //  viewModel { MainModel() }
+            viewModel { CoinListViewModel(get()) }
+            viewModel { CoinDetailViewModel(get(), get()) }
         }
 }
