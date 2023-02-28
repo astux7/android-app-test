@@ -1,4 +1,4 @@
-package com.basta.demo
+package com.basta.demo.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    MainScreen()
                 }
             }
         }
