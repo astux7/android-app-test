@@ -15,19 +15,18 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.basta.demo.domain.models.Coin
 
 @Composable
 fun CoinListItem(
-    navController: NavController,
+    onClick: () -> Unit,
     coin: Coin
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-
+                onClick()
             }
             .padding(10.dp),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -41,8 +40,8 @@ fun CoinListItem(
         )
 
         Text(
-            text = if(coin.isActive) "active" else "inactive",
-            color = if(coin.isActive) Color.Green else Color.Red,
+            text = if (coin.isActive) "active" else "inactive",
+            color = if (coin.isActive) Color.Green else Color.Red,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.bodySmall,
