@@ -1,5 +1,5 @@
 package com.basta.demo.common
 
 object Constants {
-    const val BASE_URL = "api.coinpaprika/v1"
+    const val BASE_URL = "https://api.coinpaprika.com/"
 }
