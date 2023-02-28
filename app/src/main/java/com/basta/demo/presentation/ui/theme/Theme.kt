@@ -1,4 +1,4 @@
-package com.basta.demo.ui.theme
+package com.basta.demo.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
