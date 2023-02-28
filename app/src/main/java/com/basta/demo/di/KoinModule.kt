@@ -4,6 +4,8 @@ import com.basta.demo.common.Constants
 import com.basta.demo.data.remote.CoinPaprikaApi
 import com.basta.demo.data.repository.CoinRepositoryImpl
 import com.basta.demo.domain.repository.CoinRepository
+import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
+import com.basta.demo.domain.use_case.get_coins.GetCoinsUseCase
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -23,7 +25,8 @@ object KoinModule {
 
     private val useCaseModule: Module
         get() = module {
-          //  factory { GetCoin(get()) }
+            factory { GetCoinsUseCase(get()) }
+            factory { GetCoinDetailsUseCase(get()) }
         }
 
     private val mainModule: Module
