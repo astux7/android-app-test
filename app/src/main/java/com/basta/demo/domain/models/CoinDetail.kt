@@ -10,7 +10,7 @@ data class CoinDetail(
     val logo: String?,
     val name: String?,
     val openSource: Boolean = false,
-    val orgStructure: String,
+    val orgStructure: String?,
     val rank: Int?,
     val startedAt: String?,
     val symbol: String?,

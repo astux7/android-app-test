@@ -22,6 +22,7 @@ Which is free API and does not require any authentication. This application has 
 * Retrofit - for network request
 * Koin - Dependency injection (bonus library not necessary for this project to work)
 * Jetpack compose tool for UI
+* Coil - for images
 
 ## Testing
 
