@@ -11,11 +11,10 @@ with clean architecture principles and includes an additional layer called 'UseC
 that contains the business logic.
 
 ## Service
-
 This app is fetching data from [Coin Paprika](https://coinpaprika.com) service. 
-Which is free API and does not require any authentication. This application has 2 API request:
+Which is free API and does not require any authentication. This application has 2 API requests:
 * to get all items `/v1/coins`
-* to get item details `/v1/coins/:id`
+* to get item detail `/v1/coins/:id`
 
 
 ## Libraries/ Technologies used:
@@ -23,8 +22,12 @@ Which is free API and does not require any authentication. This application has 
 * Koin - Dependency injection (bonus library not necessary for this project to work)
 * Jetpack compose tool for UI
 * Coil - for images
+* Material3 with Material UI usage
 
 ## Testing
-
+* Unit testing with JUnit4 for extensions and UseCase
 
 ## Improvements
+* Caching with Retrofit cache or Room
+* Improve UI design
+* Add Pager
