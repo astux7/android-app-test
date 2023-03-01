@@ -12,9 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.basta.demo.common.Constants.LAZY_COLUMN_TAG
 import com.basta.demo.navigation.Directions
 import com.basta.demo.presentation.coin_list.components.CoinListItem
 import org.koin.androidx.compose.getViewModel
@@ -27,7 +29,7 @@ fun CoinListScreen(
     val state = viewModel.state.value
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize().testTag(LAZY_COLUMN_TAG)) {
             items(state.coins) { coin ->
                 CoinListItem(
                     onClick = {

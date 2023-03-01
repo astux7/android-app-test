@@ -26,6 +26,7 @@ Which is free API and does not require any authentication. This application has 
 
 ## Testing
 * Unit testing with JUnit4 for extensions and UseCase
+* Integration testing UI of Jetpack Compose
 
 ## Improvements
 * Caching with Retrofit cache or Room

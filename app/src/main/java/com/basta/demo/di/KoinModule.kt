@@ -68,6 +68,11 @@ object KoinModule {
     private val viewModelModule: Module
         get() = module {
             viewModel { CoinListViewModel(get()) }
-            viewModel { (savedStateHandle: SavedStateHandle) -> CoinDetailViewModel(get(), savedStateHandle) }
+            viewModel { (savedStateHandle: SavedStateHandle) ->
+                CoinDetailViewModel(
+                    get(),
+                    savedStateHandle
+                )
+            }
         }
 }
