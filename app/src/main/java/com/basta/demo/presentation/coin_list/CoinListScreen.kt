@@ -1,5 +1,6 @@
 package com.basta.demo.presentation.coin_list
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.basta.demo.common.Constants.LAZY_COLUMN_TAG
+import com.basta.demo.common.Resource
 import com.basta.demo.navigation.Directions
 import com.basta.demo.presentation.coin_list.components.CoinListItem
 import org.koin.androidx.compose.getViewModel
@@ -29,31 +31,39 @@ fun CoinListScreen(
     val state = viewModel.state.value
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize().testTag(LAZY_COLUMN_TAG)) {
-            items(state.coins) { coin ->
-                CoinListItem(
-                    onClick = {
-                        navController.navigate(Directions.coin_detail.route + "/${coin.id}")
-                    },
-                    coin = coin
-                )
+
+        when (state) {
+            is Resource.Success -> {
+                LazyColumn(modifier = Modifier.fillMaxSize().testTag(LAZY_COLUMN_TAG)) {
+                    items(state.data.orEmpty()) { coin ->
+                        CoinListItem(
+                            onClick = {
+                                navController.navigate(Directions.coin_detail.route + "/${coin.id}")
+                            },
+                            coin = coin
+                        )
+                    }
+                }
             }
-        }
 
-        if (state.error.isNullOrBlank()) {
-            Text(
-                text = state.error,
-                color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
-            )
-        }
+            is Resource.Error -> {
+                AnimatedVisibility(visible = !state.message.isNullOrBlank()) {
 
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    Text(
+                        text = state.message.orEmpty(),
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .align(Alignment.Center)
+                    )
+                }
+            }
+
+            is Resource.Loading -> {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
         }
     }
 }

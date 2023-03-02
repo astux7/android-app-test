@@ -19,6 +19,7 @@ object Directions {
         override val arguments: List<NamedNavArgument>
             get() = emptyList()
     }
+
     val coin_detail = object : NavigationCommand {
         override val route: String
             get() = "coin_detail"

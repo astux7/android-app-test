@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.basta.demo.common.Constants
 import com.basta.demo.common.Resource
+import com.basta.demo.domain.models.CoinDetail
 import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -17,8 +18,8 @@ class CoinDetailViewModel(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(CoinDetailState())
-    val state: State<CoinDetailState> = _state
+    private val _state = mutableStateOf<Resource<CoinDetail>>(Resource.Loading())
+    val state: State<Resource<CoinDetail>> = _state
 
     init {
         savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { coinId ->
@@ -28,17 +29,7 @@ class CoinDetailViewModel(
 
     private fun getCoin(coinId: String) {
         getCoinDetailsUseCase(coinId).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _state.value = CoinDetailState(coin = result.data)
-                }
-                is Resource.Loading -> {
-                    _state.value = CoinDetailState(isLoading = true)
-                }
-                is Resource.Error -> {
-                    _state.value = CoinDetailState(error = result.message ?: "Error, try later.")
-                }
-            }
+            _state.value = result
         }.launchIn(viewModelScope)
     }
 }

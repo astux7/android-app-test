@@ -13,5 +13,4 @@ class CoinRepositoryImpl(private val api: CoinPaprikaApi) : CoinRepository {
     override suspend fun getCoinById(coinId: String): CoinDetailDto {
         return api.getCoinById(coinId)
     }
-
 }

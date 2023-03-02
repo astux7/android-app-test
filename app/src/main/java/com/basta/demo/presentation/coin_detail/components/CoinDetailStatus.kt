@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import com.basta.demo.R
 import com.basta.demo.domain.models.CoinDetail
-import com.basta.demo.presentation.toDateFormat
+import com.basta.demo.extentions.toDateFormat
 
 @Composable
 fun CoinDetailStatus(coin: CoinDetail) {
@@ -21,11 +21,11 @@ fun CoinDetailStatus(coin: CoinDetail) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
+        val status = stringResource(if (coin.isActive) R.string.active else R.string.inactive)
         Text(
             text = stringResource(
                 id = R.string.status,
-                if (coin.isActive) "active" else "inactive"
+                status
             ),
             color = if (coin.isActive) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.error,
             textAlign = TextAlign.End,
@@ -37,7 +37,7 @@ fun CoinDetailStatus(coin: CoinDetail) {
             Text(
                 text = stringResource(
                     id = R.string.start_at,
-                    it?.toDateFormat()
+                    it.toDateFormat()
                 ),
                 fontStyle = FontStyle.Italic,
                 textAlign = TextAlign.End,

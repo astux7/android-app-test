@@ -1,4 +1,4 @@
-package com.basta.demo.utils.utils
+package com.basta.demo.utils
 
 import androidx.lifecycle.SavedStateHandle
 import com.basta.demo.domain.repository.CoinRepository
@@ -6,7 +6,6 @@ import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
 import com.basta.demo.domain.use_case.get_coins.GetCoinsUseCase
 import com.basta.demo.presentation.coin_detail.CoinDetailViewModel
 import com.basta.demo.presentation.coin_list.CoinListViewModel
-import com.basta.demo.utils.FakeRepo
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module

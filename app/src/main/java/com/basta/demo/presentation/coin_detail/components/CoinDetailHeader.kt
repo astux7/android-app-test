@@ -51,7 +51,9 @@ fun CoinDetailHeader(coin: CoinDetail) {
             AsyncImage(
                 model = it,
                 contentDescription = null,
-                modifier = Modifier.width(50.dp).clip(CircleShape)
+                modifier = Modifier
+                    .width(50.dp)
+                    .clip(CircleShape)
             )
         }
     }

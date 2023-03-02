@@ -12,6 +12,6 @@ fun NavGraphBuilder.buildTheGraph(navController: NavController) {
     }
 
     composable(Directions.coin_detail.name) {
-        CoinDetailScreen(navController)
+        CoinDetailScreen()
     }
 }

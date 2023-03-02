@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.basta.demo.navigation.Directions
+import com.basta.demo.navigation.buildTheGraph
 import com.basta.demo.presentation.ui.theme.DemoAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +23,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = Directions.coin_list.name
+                    ) {
+                        buildTheGraph(navController)
+                    }
                 }
             }
         }

@@ -58,7 +58,6 @@ class FakeRepo : CoinRepository {
         startedAt = "2015-08-17T00:00:00Z"
     )
 
-
     init {
         coinList.addAll(listOf(btc, ont))
         coinDetailList.addAll(listOf(btcDetail, ontDetail))

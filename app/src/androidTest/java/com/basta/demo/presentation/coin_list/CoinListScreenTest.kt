@@ -3,7 +3,7 @@ package com.basta.demo.presentation.coin_list
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.rememberNavController
-import com.basta.demo.utils.utils.TestKoinModule
+import com.basta.demo.utils.TestKoinModule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -42,7 +42,6 @@ class CoinListScreenTest {
         composeRule.onNodeWithText("Ontology", true).assertIsDisplayed()
 
         composeRule.onNodeWithTag("LAZY_COLUMN").onChildren().assertCountEquals(2)
-
     }
 
     @Test

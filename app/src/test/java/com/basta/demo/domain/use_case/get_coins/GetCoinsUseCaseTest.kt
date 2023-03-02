@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Test
 
 class GetCoinsUseCaseTest {
-
     private lateinit var getCoins: GetCoinsUseCase
     private lateinit var fakeRepo: FakeRepo
 

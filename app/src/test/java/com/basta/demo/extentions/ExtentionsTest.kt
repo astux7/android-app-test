@@ -1,4 +1,4 @@
-package com.basta.demo.presentation
+package com.basta.demo.extentions
 
 import org.junit.Assert
 import org.junit.Test

@@ -2,7 +2,6 @@ package com.basta.demo.domain.models
 
 import com.basta.demo.data.remote.dto.CoinDto
 
-
 data class Coin(
     val id: String,
     val isActive: Boolean,
@@ -13,14 +12,12 @@ data class Coin(
     val type: String
 )
 
-fun CoinDto.toCoin() : Coin {
-    return Coin(
-        id = id,
-        isActive = isActive,
-        isNew = isNew,
-        name = name,
-        rank = rank,
-        symbol = symbol,
-        type = type
-    )
-}
+fun CoinDto.toCoin() = Coin(
+    id = id,
+    isActive = isActive,
+    isNew = isNew,
+    name = name,
+    rank = rank,
+    symbol = symbol,
+    type = type
+)

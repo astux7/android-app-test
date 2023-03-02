@@ -17,19 +17,17 @@ data class CoinDetail(
     val type: String?
 )
 
-fun CoinDetailDto.toCoinDetail(): CoinDetail {
-    return CoinDetail(
-        description = description,
-        id = id,
-        isActive = isActive,
-        isNew = isNew,
-        logo = logo,
-        name = name,
-        openSource = openSource,
-        orgStructure = orgStructure,
-        startedAt = startedAt,
-        rank = rank,
-        symbol = symbol,
-        type = type
-    )
-}
+fun CoinDetailDto.toCoinDetail() = CoinDetail(
+    description = description,
+    id = id,
+    isActive = isActive,
+    isNew = isNew,
+    logo = logo,
+    name = name,
+    openSource = openSource,
+    orgStructure = orgStructure,
+    startedAt = startedAt,
+    rank = rank,
+    symbol = symbol,
+    type = type
+)

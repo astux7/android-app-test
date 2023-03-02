@@ -2,8 +2,12 @@ package com.basta.demo.presentation
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.basta.demo.navigation.Directions
+import com.basta.demo.navigation.buildTheGraph
 import org.koin.core.context.GlobalContext.startKoin
-import com.basta.demo.utils.utils.TestKoinModule
+import com.basta.demo.utils.TestKoinModule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -21,7 +25,16 @@ class LaunchDemoAppTest {
         startKoin {
             modules(TestKoinModule.allModule())
         }
-        composeRule.setContent { MainScreen() }
+        composeRule.setContent {
+            val navController = rememberNavController()
+
+            NavHost(
+                navController = navController,
+                startDestination = Directions.coin_list.name
+            ) {
+                buildTheGraph(navController)
+            }
+        }
     }
 
     @After

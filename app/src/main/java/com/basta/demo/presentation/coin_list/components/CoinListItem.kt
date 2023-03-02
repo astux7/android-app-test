@@ -35,7 +35,9 @@ fun CoinListItem(
         Text(
             text = stringResource(
                 id = R.string.rank_title_symbol,
-                coin.rank.toString(), coin.name, coin.symbol
+                coin.rank.toString(),
+                coin.name,
+                coin.symbol
             ),
             style = MaterialTheme.typography.bodyMedium,
             overflow = TextOverflow.Ellipsis,

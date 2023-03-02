@@ -23,6 +23,7 @@ class GetCoinDetailsUseCaseTest {
         val coinId = "ont-ontology"
         getCoinDetails.invoke(coinId).test {
             val loading = awaitItem() // first value of emit is Loading
+
             assertTrue(loading is Resource.Loading)
 
             cancelAndConsumeRemainingEvents()
@@ -34,6 +35,7 @@ class GetCoinDetailsUseCaseTest {
         val coinId = "ont-ontology"
         getCoinDetails.invoke(coinId).test {
             val loading = awaitItem() // first value of emit is Loading
+
             assertTrue(loading is Resource.Loading)
 
             val result = awaitItem() // next value
@@ -50,6 +52,7 @@ class GetCoinDetailsUseCaseTest {
         val name = "Bitcoin"
         getCoinDetails.invoke(coinId).test {
             val loading = awaitItem() // first value of emit is Loading
+
             assertTrue(loading is Resource.Loading)
 
             val result = awaitItem() // next value
