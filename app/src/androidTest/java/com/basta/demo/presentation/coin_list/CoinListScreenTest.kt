@@ -2,7 +2,6 @@ package com.basta.demo.presentation.coin_list
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.navigation.compose.rememberNavController
 import com.basta.demo.utils.TestKoinModule
 import org.junit.After
 import org.junit.Before
@@ -25,8 +24,7 @@ class CoinListScreenTest {
         }
 
         composeRule.setContent {
-            val navController = rememberNavController()
-            CoinListScreen(navController, getViewModel())
+            CoinListScreen({}, getViewModel())
         }
     }
 

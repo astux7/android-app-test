@@ -20,15 +20,12 @@ import com.basta.demo.domain.models.Coin
 
 @Composable
 fun CoinListItem(
-    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     coin: Coin
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .clickable {
-                onClick()
-            }
             .padding(10.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

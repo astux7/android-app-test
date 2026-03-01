@@ -19,10 +19,12 @@ import com.basta.demo.presentation.coin_detail.components.CoinDetailBody
 import com.basta.demo.presentation.coin_detail.components.CoinDetailHeader
 import com.basta.demo.presentation.coin_detail.components.CoinDetailStatus
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun CoinDetailScreen(
-    viewModel: CoinDetailViewModel = getViewModel(),
+    coinId: String,
+    viewModel: CoinDetailViewModel = getViewModel(parameters = { parametersOf(coinId) }),
 ) {
     val state = viewModel.state.value
 

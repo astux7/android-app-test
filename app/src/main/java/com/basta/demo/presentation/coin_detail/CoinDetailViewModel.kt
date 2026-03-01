@@ -12,19 +12,16 @@ import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-// saved state handle only works from koin 3.2.1 otherwise don't pass params
 class CoinDetailViewModel(
     private val getCoinDetailsUseCase: GetCoinDetailsUseCase,
-    savedStateHandle: SavedStateHandle
+    coinId: String,
 ) : ViewModel() {
 
     private val _state = mutableStateOf<Resource<CoinDetail>>(Resource.Loading())
     val state: State<Resource<CoinDetail>> = _state
 
     init {
-        savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { coinId ->
-            getCoin(coinId)
-        }
+        getCoin(coinId)
     }
 
     private fun getCoin(coinId: String) {
