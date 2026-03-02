@@ -1,40 +1,42 @@
 package com.basta.demo.presentation.coin_detail
 
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.lifecycle.SavedStateHandle
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.basta.demo.utils.TestKoinModule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.androidx.compose.get
-import org.koin.core.context.GlobalContext
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.context.GlobalContext.stopKoin
+import org.koin.core.parameter.parametersOf
 
 class CoinDetailScreenTest {
     @get:Rule
-    val composeRule = createComposeRule()
+    val composeRule = createAndroidComposeRule<ComponentActivity>()
 
-    private var savedStateHandle = SavedStateHandle()
+    private val coinID = "btc-bitcoin"
 
     @Before
     fun setUp() {
-        GlobalContext.stopKoin()
+        stopKoin()
 
-        GlobalContext.startKoin {
+        startKoin {
             modules(TestKoinModule.allModule())
         }
 
         composeRule.setContent {
-            savedStateHandle["coinId"] = "btc-bitcoin"
-
-            CoinDetailScreen(CoinDetailViewModel(get(), savedStateHandle))
+            CoinDetailScreen(
+                koinViewModel { parametersOf(coinID) }
+            )
         }
     }
 
     @After
     fun tearDown() {
-        GlobalContext.stopKoin()
+        stopKoin()
     }
 
     @Test

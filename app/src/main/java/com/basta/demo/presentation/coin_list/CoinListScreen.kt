@@ -12,6 +12,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -19,22 +20,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.basta.demo.common.Constants.LAZY_COLUMN_TAG
 import com.basta.demo.common.Resource
+import com.basta.demo.domain.models.Coin
 import com.basta.demo.presentation.coin_list.components.CoinListItem
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun CoinListScreen(
     onItemClick: (String) -> Unit,
-    viewModel: CoinListViewModel = getViewModel()
+    state: State<Resource<List<Coin>>>,
 ) {
-    val state = viewModel.state.value
-
     Box(modifier = Modifier.fillMaxSize()) {
 
-        when (state) {
+        when (val result = state.value) {
             is Resource.Success -> {
                 LazyColumn(modifier = Modifier.fillMaxSize().testTag(LAZY_COLUMN_TAG)) {
-                    items(state.data.orEmpty()) { coin ->
+                    items(result.data.orEmpty()) { coin ->
                         CoinListItem(
                             modifier = Modifier.clickable {
                                 onItemClick(coin.id)
@@ -46,10 +45,10 @@ fun CoinListScreen(
             }
 
             is Resource.Error -> {
-                AnimatedVisibility(visible = !state.message.isNullOrBlank()) {
+                AnimatedVisibility(visible = !result.message.isNullOrBlank()) {
 
                     Text(
-                        text = state.message.orEmpty(),
+                        text = result.message.orEmpty(),
                         color = MaterialTheme.colorScheme.error,
                         textAlign = TextAlign.Center,
                         modifier = Modifier

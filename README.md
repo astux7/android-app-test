@@ -23,6 +23,7 @@ The application makes two API requests:
 * Jetpack compose - for UI
 * Coil - for images
 * Material3, Material - for UI usage
+* Navigation 3
 
 ## Testing
 * Unit testing with JUnit4 - for extensions and UseCase

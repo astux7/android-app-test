@@ -29,7 +29,7 @@ fun CoinDetailHeader(coin: CoinDetail) {
         Text(
             text = stringResource(
                 id = R.string.rank_title,
-                coin.rank.toString(), coin.name.orEmpty()
+                coin.rank.toString(), coin.name ?: ""
             ),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.primary,
@@ -47,14 +47,12 @@ fun CoinDetailHeader(coin: CoinDetail) {
             modifier = Modifier.align(Alignment.CenterVertically)
         )
 
-        coin.logo?.let {
-            AsyncImage(
-                model = it,
-                contentDescription = null,
-                modifier = Modifier
-                    .width(50.dp)
-                    .clip(CircleShape)
-            )
-        }
+        AsyncImage(
+            model = coin.logo,
+            contentDescription = null,
+            modifier = Modifier
+                .width(50.dp)
+                .clip(CircleShape)
+        )
     }
 }

@@ -12,7 +12,7 @@ import java.io.IOException
 class GetCoinDetailsUseCase(private val repo: CoinRepository) {
     operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
 
             val coin = repo.getCoinById(coinId)
 
@@ -20,7 +20,7 @@ class GetCoinDetailsUseCase(private val repo: CoinRepository) {
 
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "Error, try later."))
-        } catch (e: IOException) {
+        } catch (_: IOException) {
             emit(Resource.Error("Looks like you don't have internet connection."))
         }
     }

@@ -14,7 +14,7 @@ class CoinListViewModel(
     private val getCoinsUseCase: GetCoinsUseCase
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<Resource<List<Coin>>>(Resource.Loading())
+    private val _state = mutableStateOf<Resource<List<Coin>>>(Resource.Loading)
     val state: State<Resource<List<Coin>>> = _state
 
     init {

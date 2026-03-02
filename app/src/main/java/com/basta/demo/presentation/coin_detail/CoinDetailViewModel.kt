@@ -3,9 +3,7 @@ package com.basta.demo.presentation.coin_detail
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.basta.demo.common.Constants
 import com.basta.demo.common.Resource
 import com.basta.demo.domain.models.CoinDetail
 import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
@@ -17,7 +15,7 @@ class CoinDetailViewModel(
     coinId: String,
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<Resource<CoinDetail>>(Resource.Loading())
+    private val _state = mutableStateOf<Resource<CoinDetail>>(Resource.Loading)
     val state: State<Resource<CoinDetail>> = _state
 
     init {

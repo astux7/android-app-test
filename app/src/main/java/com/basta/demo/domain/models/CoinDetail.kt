@@ -7,7 +7,7 @@ data class CoinDetail(
     val id: String,
     val isActive: Boolean = false,
     val isNew: Boolean = false,
-    val logo: String?,
+    val logo: String,
     val name: String?,
     val openSource: Boolean = false,
     val orgStructure: String?,

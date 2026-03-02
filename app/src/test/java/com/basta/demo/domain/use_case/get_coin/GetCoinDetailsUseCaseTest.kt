@@ -38,9 +38,11 @@ class GetCoinDetailsUseCaseTest {
 
             assertTrue(loading is Resource.Loading)
 
-            val result = awaitItem() // next value
+            val result = awaitItem()
+            assertTrue(result is Resource.Success)
 
-            assertTrue(result.data?.id == coinId)
+            val data = (result as Resource.Success).data
+            assertEquals(coinId, data.id)
 
             cancelAndConsumeRemainingEvents()
         }
@@ -55,10 +57,13 @@ class GetCoinDetailsUseCaseTest {
 
             assertTrue(loading is Resource.Loading)
 
-            val result = awaitItem() // next value
+            val result = awaitItem()
+            assertTrue(result is Resource.Success)
 
-            assertTrue(result.data?.id == coinId)
-            assertEquals(result.data?.name, name)
+            val data = (result as Resource.Success).data
+
+            assertEquals(coinId, data.id)
+            assertEquals(name, data.name)
 
             cancelAndConsumeRemainingEvents()
         }

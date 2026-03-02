@@ -4,64 +4,57 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.basta.demo.common.Resource
+import com.basta.demo.domain.models.CoinDetail
 import com.basta.demo.presentation.coin_detail.components.CoinDetailBody
 import com.basta.demo.presentation.coin_detail.components.CoinDetailHeader
 import com.basta.demo.presentation.coin_detail.components.CoinDetailStatus
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun CoinDetailScreen(
-    coinId: String,
-    viewModel: CoinDetailViewModel = getViewModel(parameters = { parametersOf(coinId) }),
+    state: State<Resource<CoinDetail>>,
 ) {
-    val state = viewModel.state.value
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        when (state) {
+        when (val result = state.value) {
             is Resource.Success -> {
+                CoinDetailHeader( result.data)
 
-                state.data?.let { coin ->
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .border(BorderStroke(2.dp, Color.White)),
+                )
 
-                    CoinDetailHeader(coin)
+                CoinDetailStatus( result.data)
 
-                    Divider(
-                        modifier = Modifier
-                            .padding(bottom = 10.dp, top = 10.dp)
-                            .border(BorderStroke(2.dp, Color.Black)),
-                    )
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .border(BorderStroke(2.dp, Color.White)),
+                )
 
-                    CoinDetailStatus(coin)
-
-                    Divider(
-                        modifier = Modifier
-                            .padding(bottom = 10.dp, top = 10.dp)
-                            .border(BorderStroke(2.dp, Color.Black)),
-                    )
-
-                    CoinDetailBody(coin)
-                }
+                CoinDetailBody( result.data)
             }
 
             is Resource.Error -> {
-                AnimatedVisibility(visible = !state.message.isNullOrBlank()) {
+                AnimatedVisibility(visible = !result.message.isNullOrBlank()) {
                     Text(
-                        text = state.message.orEmpty(),
+                        text = result.message.orEmpty(),
                         color = MaterialTheme.colorScheme.error,
                         textAlign = TextAlign.Center,
                         modifier = Modifier

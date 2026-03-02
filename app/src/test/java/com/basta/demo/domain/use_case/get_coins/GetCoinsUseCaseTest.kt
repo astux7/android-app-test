@@ -5,6 +5,7 @@ import com.basta.demo.utils.FakeRepo
 import com.basta.demo.common.Resource
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -32,11 +33,13 @@ class GetCoinsUseCaseTest {
     fun `Get all coins from Paprika API`() = runBlocking {
         getCoins.invoke().test {
             val loading = awaitItem() // first value of emit is Loading
-            Assert.assertTrue(loading is Resource.Loading)
+            assertTrue(loading is Resource.Loading)
 
             val result = awaitItem() // next value
 
-            Assert.assertTrue(result.data!!.isNotEmpty())
+            assertTrue(result is Resource.Success)
+
+            assertTrue((result as Resource.Success).data.isNotEmpty())
 
             cancelAndConsumeRemainingEvents()
         }
@@ -47,11 +50,11 @@ class GetCoinsUseCaseTest {
         getCoins.invoke().test {
             val name = "Bitcoin"
             val loading = awaitItem() // first value of emit is Loading
-            Assert.assertTrue(loading is Resource.Loading)
+            assertTrue(loading is Resource.Loading)
 
             val result = awaitItem() // next value
 
-            Assert.assertEquals(result.data!!.first().name, name)
+            Assert.assertEquals((result as Resource.Success).data.first().name, name)
 
             cancelAndConsumeRemainingEvents()
         }

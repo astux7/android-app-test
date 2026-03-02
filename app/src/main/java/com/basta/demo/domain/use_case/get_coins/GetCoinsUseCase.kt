@@ -12,7 +12,7 @@ import java.io.IOException
 class GetCoinsUseCase(private val repo: CoinRepository) {
     operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
 
             val coins = repo.getCoins()
 

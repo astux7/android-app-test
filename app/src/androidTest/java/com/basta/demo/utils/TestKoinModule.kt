@@ -1,6 +1,5 @@
 package com.basta.demo.utils
 
-import androidx.lifecycle.SavedStateHandle
 import com.basta.demo.domain.repository.CoinRepository
 import com.basta.demo.domain.use_case.get_coin.GetCoinDetailsUseCase
 import com.basta.demo.domain.use_case.get_coins.GetCoinsUseCase
@@ -32,10 +31,10 @@ object TestKoinModule {
     private val viewModelModule: Module
         get() = module {
             viewModel { CoinListViewModel(get()) }
-            viewModel { (savedStateHandle: SavedStateHandle) ->
+            viewModel { (coinId: String) ->
                 CoinDetailViewModel(
                     get(),
-                    savedStateHandle
+                    coinId = coinId
                 )
             }
         }
