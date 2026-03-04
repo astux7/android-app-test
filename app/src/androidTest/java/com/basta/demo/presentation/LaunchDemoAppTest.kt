@@ -5,33 +5,41 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import com.basta.demo.navigation.NavigationRoot
 import com.basta.demo.utils.TestKoinModule
-import org.junit.After
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.stopKoin
 import org.koin.core.context.startKoin
 
 class LaunchDemoAppTest {
-    @get:Rule
-    val composeRule = createAndroidComposeRule<ComponentActivity>()
 
-    private fun setup() {
-        stopKoin()
-        startKoin {
-            androidContext(composeRule.activity)
-            modules(TestKoinModule.allModule())
+    companion object {
+        @JvmStatic
+        @BeforeClass
+        fun startKoinOnce() {
+            stopKoin()
+
+            startKoin {
+                modules(TestKoinModule.allModule())
+            }
+        }
+
+        @JvmStatic
+        @AfterClass
+        fun stopKoinOnce() {
+            stopKoin()
         }
     }
 
-    private fun launchApp() { // Reset Compose UI for each test
-        setup()
-        composeRule.setContent { NavigationRoot() }
-    }
+    @get:Rule
+    val composeRule =
+        createAndroidComposeRule<ComponentActivity>()
 
-    @After
-    fun tearDown() {
-        stopKoin()
+    private fun launchApp() {
+        composeRule.setContent {
+            NavigationRoot()
+        }
     }
 
     @Test

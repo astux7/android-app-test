@@ -28,8 +28,9 @@ class CoinDetailScreenTest {
         }
 
         composeRule.setContent {
+            val viewModel : CoinDetailViewModel = koinViewModel { parametersOf(coinID) }
             CoinDetailScreen(
-                koinViewModel { parametersOf(coinID) }
+                viewModel.state
             )
         }
     }

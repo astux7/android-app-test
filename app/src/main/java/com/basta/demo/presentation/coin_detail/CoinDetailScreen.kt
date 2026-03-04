@@ -32,7 +32,7 @@ fun CoinDetailScreen(
     ) {
         when (val result = state.value) {
             is Resource.Success -> {
-                CoinDetailHeader( result.data)
+                CoinDetailHeader(result.data)
 
                 HorizontalDivider(
                     modifier = Modifier
