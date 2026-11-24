@@ -3,6 +3,7 @@ package com.basta.demo.presentation.coin_detail.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -23,8 +24,9 @@ import com.basta.demo.domain.models.CoinDetail
 fun CoinDetailHeader(coin: CoinDetail) {
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().height(100.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
     ) {
         Text(
             text = stringResource(
